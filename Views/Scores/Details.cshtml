@@ -1,0 +1,42 @@
+﻿@model TowerOfHanoi.Models.Score
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Score</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Moves)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Moves)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentityUser.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdentityUser.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Elapsed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Elapsed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Optimal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Optimal.OptimalID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ScoreID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

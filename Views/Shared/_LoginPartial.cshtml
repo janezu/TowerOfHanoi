@@ -1,0 +1,51 @@
+@using Microsoft.AspNetCore.Identity
+@using TowerOfHanoi.Areas.Identity.Pages.Account.Manage
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var jebisimater = UserManager.GetUserName(User);
+    var user = UserManager.Users.Where(U=> U.UserName == jebisimater).Single();
+
+    var roles = await UserManager.GetRolesAsync(user);
+    foreach(var role in roles) { role.ToString(); }
+
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+
+
+
+
+
+
+
+
+        <ul class="nav navbar-nav navbar-light navbar-right">
+            <li class="text-light">
+                <button class="@ManageNavPages.IndexNavClass(ViewContext) text-light btn btn-link navbar-link" asp-area="Identity" asp-page="/Account/Manage/Personaldata" title="Manage">Hello @UserManager.GetUserName(User)!</button>
+            </li>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="nav-item active">
+                    <a class="text-light btn btn-link navbar-btn navbar-link" asp-action="index" asp-controller="variations" >Admin<span class="sr-only">(current)</span></a>
+                </li>
+
+            }
+            <li class="text-light">
+                <button type="submit" class="text-light btn btn-link navbar-btn navbar-link">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav text-light navbar-nav navbar-right">
+        <li><a class="text-light p-2" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a class="text-light p-2" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+}
+

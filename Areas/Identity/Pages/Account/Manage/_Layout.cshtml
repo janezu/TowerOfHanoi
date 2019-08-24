@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+}
+
+<h2 class="p-2">Manage your account</h2>
+
+<div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: true)
+}

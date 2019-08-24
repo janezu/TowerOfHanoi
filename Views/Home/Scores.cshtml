@@ -1,0 +1,264 @@
+﻿@model TowerOfHanoi.Models.ScoreBoard
+@{
+    ViewData["Title"] = "Scores";
+}
+
+
+<form asp-controller="Home" asp-action="Scores" method="get">
+    <div class="row col-sm justify-content-center">
+        <div class="form-group col-md-2 m-2 p-2 flex-inline">
+
+            <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+
+            <label asp-for="Variation.Code" class="control-label">Variation</label>
+            <select asp-for="Var" id="VariationID" class="form-control" asp-items="@(new SelectList(@ViewBag.ListofVariation, "VariationID", "Code"))"></select>
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group col-md-2  m-2 p-2">
+
+
+
+            <label class="control-label">Configuration</label>
+            <select asp-for="Con" id="ConfigurationID" class="form-control" asp-items="@(new SelectList(string.Empty, "ConfigurationID", "Navodilo"))"> <option>All</option></select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="form-group col-md-2  m-2 p-2">
+
+
+
+            <label class="control-label">Number of discs</label>
+            <select asp-for="diskFilter" id="OptimalID" class="form-control" asp-items="@(new SelectList(string.Empty, "OptimalID", "DiskNr"))"> <option value="">All</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option><option value=6>6</option><option value=7>7</option><option value=8>8</option></select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="form-group col-md-2  m-2 p-2">
+
+
+
+
+
+            <label asp-for="SearchString" class="control-label"></label>
+            <input type="text" asp-for="SearchString" class="form-control" />
+            <span asp-validation-for="SearchString" class="text-danger"></span>
+
+
+
+
+
+        </div>
+
+        <div class="form-group col-md-1 p-2 m-2" >
+        <label  class="control-label unselectable text-white">Username</label>
+            <input type="submit"  class="form-control" />
+            
+            </div>
+    </div>
+</form>
+
+<div class="container-fluid row justify-content-center">
+    @if (Model.Scores.Count == 0)
+    {
+        <div class="alert alert-danger">
+            There are no scores that fit the given parameters
+        </div>
+    }
+    @if (Model.Scores.Count > 0)
+    {
+        <div id="tabledad" class=" table-responsive row justify-content-center p-2 m-2 ">
+            <table class="table table-sm border border-dark  table table-condensed table-striped text-center header-fixed">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th scope="col">
+                            Variation
+                        </th>
+                        <th scope="col">
+                            Layout
+                        </th>
+
+                        <th scope="col">
+                            Nr. of discs
+                        </th>
+                        <th scope="col">
+                            Nr. of moves
+                        </th>
+
+                        <th scope="col">
+                            Time
+                        </th>
+                        <th scope="col">
+                            User
+                        </th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                    @foreach (var item in Model.Scores)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.Optimal.Configuration.Variation.VarPic" />
+                            </td>
+                            <td>
+                                From @item.Optimal.Configuration.start to @item.Optimal.Configuration.end
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Optimal.DiskNr)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Moves)
+                            </td>
+                            <td>
+
+                                @item.Elapsed.ToString(@"hh\:mm\:ss\.ff")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdentityUser.UserName)
+                            </td>
+
+
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>}
+    </div>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script> $('.pane--table2').scroll(function() {
+  $('.pane--table2 table').width($('.pane--table2').width() + $('.pane--table2').scrollLeft());
+});
+$(document).ready(function () {
+    //var items = "<option>Vse</option>";
+    //var itemsd = document.createElement("option");
+    //itemsd.innerHTML = "All";
+    /*if (document.getElementById("ConfigurationID").children.length > 0) {
+        document.getElementById("ConfigurationID").insertBefore(itemsd, document.getElementById("ConfigurationID").children[0]);
+    }*/
+    //items = '';
+    var items;
+      var url = '@Url.Content("~/")' + "Scores/GetConfiguration";
+            var ddlsource = "#VariationID";
+            $.getJSON(url, { VariationID: $(ddlsource).val() }, function (data) {
+                console.log(data);
+                /*if (document.getElementById("ConfigurationID").children.length > 1) {
+                    var items = '';
+                }*/
+                $("#ConfigurationID").empty();
+                 //var items = "<option>All</option>";
+                $.each(data, function (i, configuration) {
+
+                    items += "<option value='" + configuration.value + "'>" + configuration.text + "</option>";
+                })
+                $('#ConfigurationID').html(items);
+
+            })
+
+
+
+
+
+
+    var itemss = "<option>All</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option><option value=6>6</option><option value=7>7</option><option value=8>8</option>";
+    //$('#ConfigurationID').html(items);
+     //$('#OptimalID').html(itemss);
+
+    $("#VariationID").change(function () {
+            console.log("test");
+            var url = '@Url.Content("~/")' + "Scores/GetConfiguration";
+            var ddlsource = "#VariationID";
+            $.getJSON(url, { VariationID: $(ddlsource).val() }, function (data) {
+                console.log(data);
+                if (document.getElementById("ConfigurationID").children.length > 1) {
+                    var items = '';
+                }
+                $("#ConfigurationID").empty();
+                 //var items = "<option>All</option>";
+                $.each(data, function (i, configuration) {
+
+                    items += "<option value='" + configuration.value + "'>" + configuration.text + "</option>";
+                })
+                $('#ConfigurationID').html(items);
+
+            })
+
+    });
+
+      $("#ConfigurationIs").change(function () {
+            console.log("test");
+            var url = '@Url.Content("~/")' + "Scores/GetOptimal";
+            var ddlsource = "#ConfigurationID";
+            $.getJSON(url, { ConfigurationID: $(ddlsource).val() }, function (data) {
+                console.log(data);
+
+                $("#Optimal").empty();
+                $.each(data, function (i, optimal) {
+
+                    items += "<option value='" + optimal.value + "'>" + optimal.text + "</option>";
+                })
+                $('#OptimalID').html(items);
+
+            })
+
+        });
+
+});
+
+
+
+
+    </script>
+
+
+
+
+
+

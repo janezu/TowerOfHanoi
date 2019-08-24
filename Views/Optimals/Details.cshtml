@@ -1,0 +1,37 @@
+﻿@model TowerOfHanoi.Models.Optimal
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Optimal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DiskNr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DiskNr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MovesO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MovesO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Configuration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Configuration.ConfigurationID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OptimalID">Edit</a> |
+    <a asp-controller="variations" asp-action="index">Back to List</a>
+</div>

@@ -1,0 +1,203 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+    <div class=" justify-content-center container-fluid " style="">
+
+
+        <div class="row justify-content-center p-2 m-2">
+
+
+
+
+
+
+
+
+            <div class="card col-sm-6 p-2 m-2" style="padding:0px !important">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Tower of Hanoi</h5>
+                </div>
+                <div class="card-body" style="overflow-wrap:break-word !important; word-break:break-word !important">
+
+                    <p class=" card-text text-justify text-wrap">
+                        <b>Tower of hanoi</b> is a puzzle which consists of disks and rods. The objective of the puzzle is to move all of the disks onto a specified rod.
+                        All the discs have different sizes. At the start of the puzzle all discs are placed on the starting rod in descending order in regards to size. Only the top disc of any rod can be moved.
+                        The disc can be moved onto an empty rod or onto a rod that has a larger disc on the top of the stack. The puzzle is finished when all of the discs are on the ending rod.
+                    </p>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 align-middle my-auto">
+
+                <svg class="svga outer border border-primary rounded  bg-white d-inline align-middle " viewBox="0 0 100 100" preserveAspectRatio="xMaxYMax" style="width:250px; ">
+
+                    <line stroke="black" stroke-width="3" x1="50%" x2="50%" y1="70%" y2="20%" class="line"></line>
+                    <rect rx="2px" stroke="black" width="30%" height="10%" x="35%" y="30%" fill="green"> </rect>
+                    <rect rx="2px" stroke="black" width="40%" height="10%" x="30%" y="40%" fill="yellow"> </rect>
+                    <rect rx="2px" stroke="black" width="50%" height="10%" x="25%" y="50%" fill="blue"> </rect>
+                    <rect rx="2px" stroke="black" width="60%" height="10%" x="20%" y="60%" fill="orange"> </rect>
+                    <rect rx="2px" stroke="black" width="70%" height="10%" x="15%" y="70%" fill="red"> </rect>
+
+
+                </svg>
+
+            </div>
+
+
+            <div class="card col-sm-6 p-2 m-2" style="padding:0px !important">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Variations</h5>
+                </div>
+                <div class="card-body" style="overflow-wrap:break-word !important; word-break:break-word !important">
+
+                    <p class=" card-text text-justify text-wrap">
+                        <ul class="list-unstyled">
+                            <li class="text-wrap">There are multiple <b>variations</b> of the puzzle. A variation defines the connections between the rods. If two rods are connected, that means that a disc can be moved from one of the rods to the other.</li>
+                            <hr />
+                            <li class="text-wrap"><b>The scoring</b> of the puzzle is evaluated by the number of moves and the time it takes for the puzzle to be solved. The number of moves is considered before the elapsed time.</li>
+                            <hr />
+                            <li class="text-wrap"> A <b>move</b> constitues a disc being moved from one rod to another. The move is preformed by clicking on the tower you want to move the disc from, then clicking the tower you want to move the disc to.</li>
+                            <hr />
+                            <li class="text-wrap">
+                                If the move is valid the disc will be moved and a move added to the move counter. If the move is not valid, the tower will shake to indicate the move was not possible.
+                                A variation may contain <b>layouts</b>. A layout defines the starting and ending rod.
+                            </li>
+                        </ul>
+                    </p>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-2 align-middle my-auto" >
+
+                <img class="p-2 m-2 border border-primary rounded" style="max-width:250px" src="~/images/4-K4e.svg" />
+
+            </div>
+
+
+            <div class="card col-sm-6 p-2 m-2" style="padding:0px !important">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Parameters</h5>
+                </div>
+                <div class="card-body" style="overflow-wrap:break-word !important; word-break:break-word !important">
+
+                    <p class=" card-text text-justify text-wrap">
+                        <ul class="list-unstyled">
+                            <li class="text-wrap">
+                                Before starting the puzzle you have to set the number of towers, variation, layout and number of discs. Depending on the <i>variation, layout, number of discs and number of towers,</i> the puzzle will be solvable in an <b>optimal number of moves</b>.
+                                Not all of the puzzles will have the optimal moves set (only those that have been calculated).
+                            </li>
+                            <hr />
+                            <li class="text-wrap">
+                                <b > Animations</b> can be disabled or enabled. They are purely visual and have no effect on the complexity of the puzzle. The secondary optional parameter determines the difficulty of the puzzle. By default the difficulty is set to medium.
+                            </li>
+
+                            <hr />
+
+                            <li class="text-wrap"><b class="text-success">Easy difficulty:</b> When selecting a tower that contains a disc, all the possible valid moves will be highlighted with a green outline. If no towers are highlighted that means no valid move exists for that particular tower at this point (takes disc size into consideration).</li>
+                            <hr />
+
+                            <li class="text-wrap"><b class="text-warning">Medium difficulty:</b> When selecting a tower (whether it contains a disc or not), all the towers that are connected to the selected tower will be highlighted with a green outline (does not take disc size into consideration).</li>
+                            <hr />
+                            <li class="text-wrap"><b class="text-danger">Hard difficulty:</b>  When selecting a tower the user will recieve no assistance and will have to remember the connections between the rods or defer to the picture below the puzzle.).</li>
+                        </ul>
+                    </p>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 align-middle my-auto">
+                <div class="row justify-content-center">
+
+
+                    <div class="col-sm-12  ">
+                        <svg class="svga outer border border-primary rounded  bg-white d-inline align-middle mx-auto " viewBox="0 0 100 100" preserveAspectRatio="xMaxYMax" style="width:250px; ">
+
+                            <line stroke="black" stroke-width="3" x1="50%" x2="50%" y1="70%" y2="20%" class="line"></line>
+
+                            <rect id="tangle" rx="2px" stroke="black" width="50%" height="10%" x="25%" y="50%" fill="blue"> </rect>
+                            <rect rx="2px" stroke="black" width="60%" height="10%" x="20%" y="60%" fill="orange"> </rect>
+                            <rect rx="2px" stroke="black" width="70%" height="10%" x="15%" y="70%" fill="red"> </rect>
+                            <animate xlink:href="#tangle"
+                                     attributeName="y"
+                                     from="-20%"
+                                     to="50%"
+                                     dur="4s"
+                                     repeatCount="indefinite" />
+
+                        </svg>
+                    </div>
+
+                    <div class="col-sm-12 ">
+
+
+                        <svg class="svga outer border border-primary rounded  bg-white d-inline align-middle mx-auto " viewBox="0 0 100 100" preserveAspectRatio="xMaxYMax" style=" background-color:floralwhite !important ">
+
+                            <line stroke="black" stroke-width="3" x1="50%" x2="50%" y1="70%" y2="20%" class="line"></line>
+
+
+                            <rect rx="2px" stroke="black" width="30%" height="10%" x="35%" y="60%" fill="green"> </rect>
+                            <rect rx="2px" stroke="black" width="70%" height="10%" x="17.5%" y="70%" fill="orange"> </rect>
+
+
+                        </svg>
+
+
+                        <svg class="svga outer border border-success rounded  bg-white d-inline align-middle mx-auto " viewBox="0 0 100 100" preserveAspectRatio="xMaxYMax" >
+
+                            <line stroke="black" stroke-width="3" x1="50%" x2="50%" y1="70%" y2="20%" class="line"></line>
+
+                            <rect rx="2px" stroke="black" width="40%" height="10%" x="30%" y="50%" fill="yellow"> </rect>
+                            <rect rx="2px" stroke="black" width="50%" height="10%" x="25%" y="60%" fill="blue"> </rect>
+
+                            <rect rx="2px" stroke="black" width="70%" height="10%" x="15%" y="70%" fill="red"> </rect>
+
+
+                        </svg>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="card col-sm-8 p-2 m-2" style="padding:0px !important">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Users</h5>
+                </div>
+                <div class="card-body" style="overflow-wrap:break-word !important; word-break:break-word !important">
+
+                    <p class=" card-text text-justify text-wrap">
+                        <ul class="list-unstyled">
+                            <li class="text-wrap">
+                                The puzzle starts when you press the <b>create</b> button and ends when the last move is indicated (the animation doesn't have to finish).
+                            </li>
+                            <hr />
+                            <li class="text-wrap">
+                                When the puzzle is created, a <b>table of the top 10 scores</b> for that combination of parameters (tower number, variation, layout, disc number) is shown.
+                            </li>
+
+                            <hr />
+
+                            <li class="text-wrap">
+                                If the user is <b>logged in</b> their result will be posted to the database, and the table updated if they reach a top 10 spot. Every user can check the scores and filter through them on the scoreboard. If the user is not
+                                logged in their result will not be sent to the database but they may still solve all of the puzzles and view existing scores.
+                            </li>
+                 
+
+        
+                    </ul>
+                    </p>
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+
+

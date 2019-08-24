@@ -1,0 +1,49 @@
+﻿@model TowerOfHanoi.Models.Variation
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Variation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Connections)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Connections)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VarPic)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VarPic)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TowerN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TowerN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Directed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Directed)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VariationID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

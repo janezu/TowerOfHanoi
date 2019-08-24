@@ -1,0 +1,71 @@
+﻿@model TowerOfHanoi.Models.ScoreIndexData
+@{
+    ViewData["Title"] = "Optimal results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="row justify-content-center">
+        <h2 class="p-2">Table of optimal results</h2>
+        @foreach (var itemx in Model.unique)
+        {
+           
+          
+    <div class="table-responsive p-2 m-2 col-sm-10">
+        <h2 class="p-2">@itemx  Pegs</h2>
+        <table class="table table-sm table-bordered table-condensed border border-dark text-center">
+            <thead class="bg-primary text-light">
+                <tr>
+                    <th class="p-0 m-0 smallc">Graph</th>
+                    <th class="smallc p-1 m-0">Code</th>
+                    <th class="smallc p-1 m-0">Start</th>
+                    <th class="rightb p-1 m-0">End</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.Variations)
+            {@if (itemx == item.TowerN)
+                {
+                    @foreach (var vari in item.Configurations)
+                    { var optimale = new List<Optimal>();
+                        optimale = vari.Optimals.OrderBy(x => x.DiskNr).ToList();
+                        int number = 0;
+                        <tr>
+                            <td><img src="@vari.conPic"/></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Code)
+                            </td>
+
+
+
+                            <td>@Html.DisplayFor(modelItem => vari.start)</td>
+                            <td class="rightb p-1 ">@Html.DisplayFor(modelItem => vari.end)</td>
+
+
+                            @foreach (var opti in optimale)
+                            {
+
+                                if (opti.MovesO != 0 && opti.DiskNr <= 8)
+                                {
+                                    <td>@Html.DisplayFor(modelItem => opti.MovesO)</td>
+                                }
+                                if (opti.MovesO == 0 && opti.DiskNr <= 8)
+                                {
+                                    <td>-</td>
+                                }
+                                number = number + 1;
+                            }
+
+                        </tr>
+
+                    }}}
+        </table>
+    </div>}
+    </div>

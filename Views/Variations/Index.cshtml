@@ -1,0 +1,186 @@
+﻿@model TowerOfHanoi.Models.ScoreIndexData
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row justify-content-center p-2 m-2">
+    <h3 class="col-sm-12">
+        Variations
+    </h3>
+    <div class="table-responsive">
+        <table class="table-sm table table-condensed text-center border border-dark">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Graph
+                    </th>
+                    <th>
+                        Number of towers
+                    </th>
+                    <th>
+                        Connections
+                    </th>
+
+                    <th>
+                        Directed
+                    </th>
+                    <th><a class="btn btn-sm text-primary bg-white" asp-action="Create">Create New</a> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Variations)
+                {
+                    string selectedRow = "";
+                    if (item.VariationID == (int?)ViewData["VariationID"])
+                    {
+                        selectedRow = "bg-light";
+                    }
+
+
+                <tr class="@selectedRow">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VariationID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+
+                    <td>
+                       <img src="@Html.DisplayFor(modelItem => item.VarPic)" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TowerN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Connections)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Directed)
+                    </td>
+
+
+
+
+                    <td>
+                        <a asp-action="Index" asp-route-id="@item.VariationID">Select</a> |
+                        <a asp-action="Edit" asp-route-id="@item.VariationID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.VariationID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.VariationID">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@if (Model.Configurations != null)
+{
+    <div class="row justify-content-center p-2 m-2">
+        <h3 class="col-sm-12">Layouts belonging to selected variation</h3>
+        <div class="table-responsive col-sm-8">
+            <table class="table-sm table  table-condensed border border-dark">
+                <thead class="bg-primary text-white">
+                    <tr>
+
+
+                        <th>Id</th>
+
+                        <th>Instruction</th>
+                        <th>Graph</th>
+                        <th>Start tower</th>
+                        <th>End tower</th>
+                        <th><a class="btn btn-sm text-primary bg-white" asp-controller="Configurations" asp-action="Create">Create New</a></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.Configurations)
+                {
+                    string selectedRow = "";
+                    if (item.ConfigurationID == (int?)ViewData["ConfigurationID"])
+                    {
+                        selectedRow = "bg-light";
+                    }
+            <tr class="@selectedRow">
+                <td>
+                    @item.ConfigurationID
+                </td>
+                <td>
+                    @item.navodilo
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.conPic)" />
+                </td>
+                <td>
+                    @item.start
+                </td>
+                <td>
+                    @item.end
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { courseID = item.ConfigurationID }) |
+                    <a asp-controller="Configurations" asp-action="Edit" asp-route-id="@item.ConfigurationID">Edit</a> |
+                    <a asp-controller="Configurations" asp-action="Details" asp-route-id="@item.ConfigurationID">Details</a> |
+                    <a asp-controller="Configurations" asp-action="Delete" asp-route-id="@item.ConfigurationID">Delete</a>
+                </td>
+            </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+}
+
+@if (Model.Optimals != null)
+{<div class="row justify-content-center p-2 m-2">
+        <h3 class="col-sm-12">
+            Solutions of selected layout
+        </h3>
+
+        <div class="col-sm-8 table-responsive" style="max-width:700px !important">
+            <table class="table-sm table  table-condensed border border-dark" >
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Id</th>
+                        <th>Number of discs</th>
+                        <th>
+                            Optimal number of moves
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Optimals)
+                {
+            <tr>
+                <td>
+                @item.OptimalID
+                </td>
+
+                <td>
+                    @item.DiskNr
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovesO)
+                </td>
+                <td>
+                    <a asp-controller="Optimals" asp-action="Edit" asp-route-id="@item.OptimalID">Edit</a> |
+                    <a asp-controller="Optimals" asp-action="Details" asp-route-id="@item.OptimalID">Details</a> |
+                    <a asp-controller="Optimals" asp-action="Delete" asp-route-id="@item.OptimalID">Delete</a>
+                </td>
+            </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
+
