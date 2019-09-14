@@ -37,7 +37,7 @@ namespace TowerOfHanoi.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            
+           // [Remote("UserNameLogin", "Home")]
             public string UserName { get; set; }
 
             [Required]
@@ -74,9 +74,8 @@ namespace TowerOfHanoi.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 
-                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                var user =  _signInManager.UserManager.Users.Where(s => s.UserName == Input.UserName).Single();
-                var confirm = user.EmailConfirmed;
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                
 
                
                 if (result.Succeeded)
@@ -95,12 +94,19 @@ namespace TowerOfHanoi.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    if (confirm == false) { ModelState.AddModelError(string.Empty, "Please confirm your email adress before logging in."); }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    if (_signInManager.UserManager.Users.Where(s => s.UserName == Input.UserName).Any()) {
+                        var user = _signInManager.UserManager.Users.Where(s => s.UserName == Input.UserName).Single();
+                        var confirm = user.EmailConfirmed;
+
+                        if (confirm == false) { ModelState.AddModelError(string.Empty, "Please confirm your email adress before logging in."); }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        }
+                        return Page();
                     }
-                    return Page();
+                    else { ModelState.AddModelError(string.Empty, "Invalid login attempt."); }
+                    
                 }
             }
 

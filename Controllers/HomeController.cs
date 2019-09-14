@@ -260,6 +260,11 @@ namespace TowerOfHanoi.Controllers
         }
 
 
+
+
+
+
+
         public async Task<IActionResult> Test(int? id)
         {
             if (id == null)
@@ -314,7 +319,14 @@ namespace TowerOfHanoi.Controllers
             {
                 _context.Add(score);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var bar = _context.Score.Where(s => s.ScoreID == score.ScoreID).First();
+             
+                var list =  _context.Score.Where(s => s.OptimalID == bar.OptimalID).OrderBy(s => s.Moves).ThenBy(s => s.Elapsed).ToList();
+                int index = list.FindIndex(a => a.ScoreID == bar.ScoreID) + 1;
+
+
+                return Json(index);
+                //return RedirectToAction(nameof(Index));
             }
             ViewData["OptimalID"] = new SelectList(_context.Configuration, "OptimalID", "OptimalID", score.OptimalID);
             return View(score);
@@ -463,7 +475,7 @@ namespace TowerOfHanoi.Controllers
                 return Json(false);
             }
         }
-
+        [AllowAnonymous]
         private bool IsEmailExists(string email)
             => _context.Users.Any(e => e.Email == email);
 
@@ -482,8 +494,27 @@ namespace TowerOfHanoi.Controllers
                 return Json(false);
             }
         }
-
+        [AllowAnonymous]
         private bool IsUserNameExists(string username)
+            => _context.Users.Any(e => e.UserName == username);
+
+
+
+        [AllowAnonymous]
+
+        public IActionResult UserNameLogin([Bind(Prefix = "Input.UserName")] String username)
+        {
+            try
+            {
+                return Json(IsUserNameLogin(username));
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        }
+        [AllowAnonymous]
+        private bool IsUserNameLogin(string username)
             => _context.Users.Any(e => e.UserName == username);
 
 

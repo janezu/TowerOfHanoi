@@ -8,8 +8,8 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    var jebisimater = UserManager.GetUserName(User);
-    var user = UserManager.Users.Where(U=> U.UserName == jebisimater).Single();
+    var jm = UserManager.GetUserName(User);
+    var user = UserManager.Users.Where(U=> U.UserName == jm).Single();
 
     var roles = await UserManager.GetRolesAsync(user);
     foreach(var role in roles) { role.ToString(); }
