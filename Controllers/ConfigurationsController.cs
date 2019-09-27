@@ -96,6 +96,13 @@ namespace TowerOfHanoi.Controllers
             new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=6, MovesO=p6},
             new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=7, MovesO=p7},
             new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=8, MovesO=p8},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=9, MovesO=0},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=10, MovesO=0},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=11, MovesO=0},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=12, MovesO=0},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=13, MovesO=0},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=14, MovesO=0},
+            new Optimal {ConfigurationID=configuration.ConfigurationID, DiskNr=15, MovesO=0},
           };
                 foreach (Optimal o in Optimals)
                 {

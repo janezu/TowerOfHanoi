@@ -251,9 +251,11 @@ function setVariation() {
 
     var ori = document.getElementById("varNr").getAttribute("value");
     var ors = document.getElementById("varS").getAttribute("data-pic");
+
+   
     var spic = ors.split(".")[0];
     spic = spic + ".svg";
-
+    if (ors.includes("http")){ spic=ors};
 
     var nr = document.getElementsByClassName("col-sm").length;
     var cr = 0;
@@ -412,7 +414,7 @@ function pVariations(dis) {
 
 
     //document.getElementById("varNr").innerHTML = "<img src='" + vals + "' />";
-    document.getElementById("varNr").innerHTML = "<img src='" + vals + "'/>";
+    document.getElementById("varNr").innerHTML = "<img src='" + valss + "'/>";
     document.getElementById("varNr").setAttribute("value", val);
     document.getElementById("varNr").setAttribute("data-connections", conns);
     document.getElementById("varNr").setAttribute("data-pic", vals);
@@ -980,6 +982,7 @@ function doSomething(we) {
                         }
                         if (document.getElementById("animT").value == "0") {
                             ending();
+                        
                         }
                     }
 
